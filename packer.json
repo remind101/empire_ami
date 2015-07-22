@@ -1,0 +1,68 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "name": "empire-us-east-1",
+      "access_key": "",
+      "secret_key": "",
+      "region": "us-east-1",
+      "source_ami": "ami-c135f3aa",
+      "instance_type": "m3.medium",
+      "ssh_username": "ubuntu",
+      "ssh_timeout": "5m",
+      "ami_name": "Empire Image {{isotime | clean_ami_name}}",
+      "ami_groups": ["all"]
+    },
+    {
+      "type": "amazon-ebs",
+      "name": "empire-us-west-1",
+      "access_key": "",
+      "secret_key": "",
+      "region": "us-west-1",
+      "source_ami": "ami-bf3dccfb",
+      "instance_type": "m3.medium",
+      "ssh_username": "ubuntu",
+      "ssh_timeout": "5m",
+      "ami_name": "Empire Image {{isotime | clean_ami_name}}",
+      "ami_groups": ["all"]
+    },
+    {
+      "type": "amazon-ebs",
+      "name": "empire-us-west-2",
+      "access_key": "",
+      "secret_key": "",
+      "region": "us-west-2",
+      "source_ami": "ami-f15b5dc1",
+      "instance_type": "m3.medium",
+      "ssh_username": "ubuntu",
+      "ssh_timeout": "5m",
+      "ami_name": "Empire Image {{isotime | clean_ami_name}}",
+      "ami_groups": ["all"]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files",
+      "destination": "/tmp/packer_files"
+    },
+    {
+      "type": "file",
+      "source": "ansible",
+      "destination": "/tmp/ansible"
+    },
+    {
+      "type": "shell",
+      "pause_before": "60s",
+      "execute_command": "chmod +x {{ .Path  }}; {{ .Vars  }} sudo {{ .Path  }}",
+      "script": "files/setup.sh"
+    },
+    {
+      "type": "ansible-local",
+      "command": "chmod +x /tmp/packer-provisioner-ansible-local/hosts; EMPIRE_HOSTGROUP=empire_ami sudo -E ansible-playbook --tags build_ami ",
+      "playbook_file": "./ansible/site.yml",
+      "inventory_file": "files/hosts",
+      "playbook_dir": "./ansible"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+- name: Gather EC2 facts
+  action: ec2_facts
+- name: Manage /etc/hosts
+  template: src=etc/hosts dest=/etc/hosts owner=root group=root mode=0644
+- apt: update_cache=yes
+  tags: 
+    - build_ami
+- apt: name=apt-transport-https
+  tags: 
+    - build_ami
+- apt: name=ca-certificates
+  tags: 
+    - build_ami
+- apt_repository: repo='deb https://get.docker.com/ubuntu docker main' state=present
+  tags: 
+    - build_ami
+- apt_key: url=http://get.docker.io/gpg
+  tags: 
+    - build_ami
+- apt: update_cache=yes
+  tags: 
+    - build_ami
+- apt: name=openntpd
+  tags: 
+    - build_ami
+- service: name=openntpd state=started enabled=yes
+- file: path=/etc/empire/env owner=root group=root mode=0644 state=directory
+  tags: 
+    - build_ami
+
+# TODO: Determine usefulness
+#- copy: src=root/.dockercfg.{{r101_environment}} dest=/root/.dockercfg owner=root group=root mode=0600
+#  when: r101_environment is defined
+#  ignore_errors: yes
+#- set_fact:
+#    ansible_cron_minute1: "{{30 | mod_mac_addr }}"
+#    ansible_cron_minute2: "{{30 | mod_mac_addr + 30 }}"
+#- cron: name=ansible cron_file=ansible user=root minute="{{ansible_cron_minute1}},{{ansible_cron_minute2}}" job="/sbin/start ansible"
+
+- apt: name=awscli
+  tags: 
+    - build_ami
+- apt: name=python-pip state=absent
+  tags: 
+    - build_ami
+- apt: name=python-setuptools
+  tags: 
+    - build_ami
+- shell: /usr/bin/easy_install -U pip creates=/usr/local/bin/pip
+  tags: 
+    - build_ami
+- pip: name=boto
+  tags: 
+    - build_ami

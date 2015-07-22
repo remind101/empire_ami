@@ -1,0 +1,27 @@
+#!/usr/bin/python
+
+import sys
+from base64 import b64encode
+import json
+
+DEFAULT_REGISTRY = "https://index.docker.io/v1/"
+
+if len(sys.argv) < 4 or len(sys.argv) > 5:
+    print ("syntax: %s <docker_user> <docker_pass> <docker_email> "
+           "[<registry_url]\n" % sys.argv[0])
+    print "    registry_url is optional, default: %s" % DEFAULT_REGISTRY
+    sys.exit(1)
+
+user = sys.argv[1]
+password = sys.argv[2]
+email = sys.argv[3]
+try:
+    registry = sys.argv[4]
+except IndexError:
+    registry = DEFAULT_REGISTRY
+
+auth_str = b64encode("%s:%s" % (user, password))
+
+auth_dict = {registry: {"auth": auth_str, "email": email}}
+
+print json.dumps(auth_dict)

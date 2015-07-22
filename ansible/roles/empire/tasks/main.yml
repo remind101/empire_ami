@@ -1,0 +1,12 @@
+- include_vars: empire.yml
+- shell: /usr/sbin/make_dockercfg {{docker_user}} {{docker_pass}} {{docker_email}} {{docker_registry}} > /etc/empire/dockercfg
+  args:
+    creates: /etc/empire/dockercfg
+- copy: src=etc/init/empire.conf dest=/etc/init/empire.conf
+  notify: 
+    - restart_empire
+- template: src=etc/empire/env/empire.env dest=/etc/empire/env/empire.env mode=0640 owner=root group=root
+  notify: 
+    - restart_empire
+
+- service: name=empire state=started

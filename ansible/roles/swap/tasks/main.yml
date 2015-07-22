@@ -1,0 +1,13 @@
+- stat: path=/dev/xvdi
+  register: dev_xvdi
+
+- name: Make swap
+  command: mkswap /dev/xvdi
+  when: ansible_swaptotal_mb < 1 and dev_xvdi.stat.exists
+
+- mount: name=swap src=/dev/xvdi fstype=swap state=present opts=sw passno=0 dump=0
+  when: ansible_swaptotal_mb < 1 and dev_xvdi.stat.exists
+
+- name: Mount swap
+  command: "swapon -a"
+  when: ansible_swaptotal_mb < 1 and dev_xvdi.stat.exists

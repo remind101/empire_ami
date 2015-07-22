@@ -1,0 +1,21 @@
+- hosts: minion
+  connection: local
+  roles:
+    - common
+    - swap
+    - docker
+    - aws_ecs
+- hosts: controller
+  connection: local
+  roles:
+    - common
+    - swap
+    - docker
+    - empire
+- hosts: empire_ami
+  connection: local
+  roles:
+    - common
+    - docker
+    - aws_ecs
+    - empire

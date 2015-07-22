@@ -1,0 +1,5 @@
+ecs_cluster: "{{ lookup('env', 'ECS_CLUSTER') }}"
+docker_user: "{{ lookup('env', 'DOCKER_USER') }}"
+docker_pass: "{{ lookup('env', 'DOCKER_PASS') }}"
+docker_email: "{{ lookup('env', 'DOCKER_EMAIL') }}"
+docker_registry: "{{ lookup('env', 'DOCKER_REGISTRY') }}"
