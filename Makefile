@@ -12,4 +12,4 @@ ami-all:
 
 download-packer:
 	mkdir -p $(HOME)/bin
-	[ ! -f $(HOME)/bin/packer ] && curl --location -O https://dl.bintray.com/mitchellh/packer/packer_0.8.2_linux_amd64.zip && unzip -d /home/ubuntu/bin packer_0.8.2_linux_amd64.zip
+	set -o pipefail; [ ! -f $(HOME)/bin/packer ] && curl --location -O https://dl.bintray.com/mitchellh/packer/packer_0.8.2_linux_amd64.zip && unzip -d /home/ubuntu/bin packer_0.8.2_linux_amd64.zip
