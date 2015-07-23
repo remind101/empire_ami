@@ -14,7 +14,7 @@ ami-all:
 
 download-packer:
 	mkdir -p $(HOME)/bin
-	[ ! -f $(HOME)/bin/packer ] && curl --location -O https://dl.bintray.com/mitchellh/packer/packer_0.8.2_linux_amd64.zip && unzip -d /home/ubuntu/bin packer_0.8.2_linux_amd64.zip
+	[ ! -f $(HOME)/bin/packer ] && curl --location -O https://dl.bintray.com/mitchellh/packer/packer_0.8.2_linux_amd64.zip && unzip -d $(HOME)/bin packer_0.8.2_linux_amd64.zip
 
 build:
-	set -o pipefail; packer -machine-readable build -color=false ./packer.json | tee -a $CIRCLE_ARTIFACTS/packer.out
+	set -o pipefail; packer -machine-readable build -color=false ./packer.json | tee -a $(CIRCLE_ARTIFACTS)/packer.out
