@@ -6,7 +6,7 @@ dependencies:
   cache_directories:
     - /home/ubuntu/bin
   pre:
-    - cd ~/empire_ami && make download-packer
+    - cd ~/empire_ami; make download-packer
 
 test:
   override:
