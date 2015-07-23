@@ -7,8 +7,8 @@ dependencies:
     - /home/ubuntu/bin
   pre:
     - mkdir -p /home/ubuntu/bin
-    - [ ! -d /home/ubuntu/bin/packer ] && curl --location -O https://dl.bintray.com/mitchellh/packer/packer_0.8.2_linux_amd64.zip
-    - [ ! -d /home/ubuntu/bin/packer ] && unzip -d /home/ubuntu/bin packer_0.8.2_linux_amd64.zip
+    - [ ! -d /home/ubuntu/bin/packer ] \&\& curl --location -O https://dl.bintray.com/mitchellh/packer/packer_0.8.2_linux_amd64.zip
+    - [ ! -d /home/ubuntu/bin/packer ] \&\& unzip -d /home/ubuntu/bin packer_0.8.2_linux_amd64.zip
 
 test:
   override:
