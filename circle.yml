@@ -10,4 +10,4 @@ dependencies:
 
 test:
   override:
-    - cd ~/empire_ami && packer -machine-readable build -color=false ./packer.json | tee -a $CIRCLE_ARTIFACTS/packer.out
+    - cd ~/empire_ami; make build
