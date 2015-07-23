@@ -10,7 +10,7 @@
       "instance_type": "m3.medium",
       "ssh_username": "ubuntu",
       "ssh_timeout": "5m",
-      "ami_name": "Empire Image {{isotime | clean_ami_name}}",
+      "ami_name": "Empire PaaS {{isotime | clean_ami_name}}",
       "ami_groups": ["all"]
     },
     {
@@ -23,7 +23,7 @@
       "instance_type": "m3.medium",
       "ssh_username": "ubuntu",
       "ssh_timeout": "5m",
-      "ami_name": "Empire Image {{isotime | clean_ami_name}}",
+      "ami_name": "Empire PaaS {{isotime | clean_ami_name}}",
       "ami_groups": ["all"]
     },
     {
@@ -36,7 +36,7 @@
       "instance_type": "m3.medium",
       "ssh_username": "ubuntu",
       "ssh_timeout": "5m",
-      "ami_name": "Empire Image {{isotime | clean_ami_name}}",
+      "ami_name": "Empire PaaS {{isotime | clean_ami_name}}",
       "ami_groups": ["all"]
     }
   ],
