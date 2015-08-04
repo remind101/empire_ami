@@ -4,7 +4,7 @@ ifeq ($(CIRCLE_BRANCH),master)
 	TEMPLATE = ./packer.json
 else
 	TEMPLATE = ./packer.json.dev
-fi
+endif
 
 us-east-1:
 	packer build --only=empire-us-east-1 $(TEMPLATE)
