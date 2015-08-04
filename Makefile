@@ -1,16 +1,22 @@
 SHELL=/bin/bash
 
+ifeq ($(CIRCLE_BRANCH),master)
+	TEMPLATE = ./packer.json
+else
+	TEMPLATE = ./packer.json.dev
+fi
+
 us-east-1:
-	packer build --only=empire-us-east-1 ./packer.json
+	packer build --only=empire-us-east-1 $(TEMPLATE)
 
 us-west-1:
-	packer build --only=empire-us-west-1 ./packer.json
+	packer build --only=empire-us-west-1 $(TEMPLATE)
 
 us-west-2:
-	packer build --only=empire-us-west-2 ./packer.json
+	packer build --only=empire-us-west-2 $(TEMPLATE)
 
 ami-all:
-	packer build ./packer.json
+	packer build $(TEMPLATE)
 
 download-packer:
 	mkdir -p $(HOME)/bin
