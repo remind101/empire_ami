@@ -1,0 +1,19 @@
+#!/usr/bin/python
+
+import sys
+
+try:
+    packer_file = sys.argv[1]
+except IndexError:
+    print "syntax: %s <packer_output_file>" % sys.argv[0]
+    sys.exit(1)
+
+for line in open(packer_file):
+    line = line.strip()
+    parts = line.split(',')
+    if parts[2] != 'artifact':
+        continue
+    if parts[4] != 'id':
+        continue
+    region, ami = parts[-1].split(':')
+    print "%s: %s" % (region, ami)

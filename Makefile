@@ -26,3 +26,4 @@ download-packer:
 
 build:
 	set -o pipefail; packer -machine-readable build -color=false $(TEMPLATE) | tee -a $(CIRCLE_ARTIFACTS)/packer.out
+	/usr/sbin/get_packer_amis $(CIRCLE_ARTIFACTS)/packer.out > $(CIRCLE_ARTIFACTS)/amis.yml
