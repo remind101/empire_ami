@@ -23,4 +23,4 @@ download-packer:
 	if [ ! -f $(HOME)/bin/packer ]; then curl --location -O https://dl.bintray.com/mitchellh/packer/packer_0.8.2_linux_amd64.zip && unzip -d $(HOME)/bin packer_0.8.2_linux_amd64.zip; fi
 
 build:
-	set -o pipefail; packer -machine-readable build -color=false ./packer.json | tee -a $(CIRCLE_ARTIFACTS)/packer.out
+	set -o pipefail; packer -machine-readable build -color=false $(TEMPLATE) | tee -a $(CIRCLE_ARTIFACTS)/packer.out
