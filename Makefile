@@ -1,8 +1,10 @@
 SHELL=/bin/bash
 
 ifeq ($(CIRCLE_BRANCH),master)
+	# builds in us-east-1, us-west-1, us-west-2 and exposes to the world
 	TEMPLATE = ./packer.json
 else
+	# Only builds in us-east-1, and doesn't expose to the world
 	TEMPLATE = ./packer.json.dev
 endif
 

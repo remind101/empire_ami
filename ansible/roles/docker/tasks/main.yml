@@ -23,6 +23,10 @@
   ignore_errors: yes
   when: new_docker_fs|changed
 
+- copy: src=etc/default/docker dest=/etc/default/docker owner=root group=root mode=0644
+  tags:
+    - build_ami
+
 - apt: name=linux-image-extra-{{ansible_kernel}}
   tags: 
     - build_ami
