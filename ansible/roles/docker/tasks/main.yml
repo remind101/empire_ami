@@ -32,7 +32,7 @@
 - apt: name=apparmor
   tags: 
     - build_ami
-- apt: name=lxc-docker
+- apt: name=docker-engine
   tags: 
     - build_ami
 
