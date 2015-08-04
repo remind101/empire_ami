@@ -26,6 +26,8 @@
 - copy: src=etc/default/docker dest=/etc/default/docker owner=root group=root mode=0644
   tags:
     - build_ami
+  notify:
+    - restart_docker
 
 - apt: name=linux-image-extra-{{ansible_kernel}}
   tags: 
@@ -39,6 +41,12 @@
 - apt: name=docker-engine
   tags: 
     - build_ami
+
+- copy: src=etc/init/docker.conf dest=/etc/init/docker.conf owner=root group=root mode=0644
+  tags:
+    - build_ami
+  notify:
+    - restart_docker
 
 # Create docker_maid cron job
 - copy: src=usr/sbin/docker_maid dest=/usr/sbin/docker_maid owner=root group=root mode=0755
