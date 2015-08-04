@@ -29,9 +29,6 @@ mv /tmp/packer_files/ansible.conf /etc/init/ansible.conf
 mv /tmp/packer_files/make_dockercfg /usr/sbin/make_dockercfg
 chmod +x /usr/sbin/make_dockercfg
 
-mv /tmp/packer_files/get_packer_amis /usr/sbin/get_packer_amis
-chmod +x /usr/sbin/get_packer_amis
-
 mkdir -p /etc/empire
 mv /tmp/ansible /etc/empire/ansible
 
