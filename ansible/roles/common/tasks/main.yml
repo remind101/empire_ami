@@ -11,10 +11,10 @@
 - apt: name=ca-certificates
   tags: 
     - build_ami
-- apt_repository: repo='deb https://get.docker.com/ubuntu docker main' state=present
+- apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main' state=present
   tags: 
     - build_ami
-- apt_key: url=http://get.docker.io/gpg
+- apt_key: keyserver=p80.pool.sks-keyservers.net id=58118E89F3A912897C070ADBF76221572C52609D
   tags: 
     - build_ami
 - apt: update_cache=yes
@@ -27,15 +27,6 @@
 - file: path=/etc/empire/env owner=root group=root mode=0644 state=directory
   tags: 
     - build_ami
-
-# TODO: Determine usefulness
-#- copy: src=root/.dockercfg.{{r101_environment}} dest=/root/.dockercfg owner=root group=root mode=0600
-#  when: r101_environment is defined
-#  ignore_errors: yes
-#- set_fact:
-#    ansible_cron_minute1: "{{30 | mod_mac_addr }}"
-#    ansible_cron_minute2: "{{30 | mod_mac_addr + 30 }}"
-#- cron: name=ansible cron_file=ansible user=root minute="{{ansible_cron_minute1}},{{ansible_cron_minute2}}" job="/sbin/start ansible"
 
 - apt: name=awscli
   tags: 
