@@ -1,5 +1,5 @@
 - include_vars: empire.yml
-- shell: /usr/sbin/make_dockercfg {{docker_user}} {{docker_pass}} {{docker_email}} {{docker_registry}} > /etc/empire/dockercfg
+- shell: /usr/sbin/make_dockercfg {{docker_user|quote}} {{docker_pass|quote}} {{docker_email|quote}} {{docker_registry|quote}} > /etc/empire/dockercfg
   args:
     creates: /etc/empire/dockercfg
 - copy: src=etc/init/empire.conf dest=/etc/init/empire.conf
