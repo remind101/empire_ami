@@ -2,7 +2,7 @@
 - file: name=/var/run/ecs_agent mode=0750 owner=root group=root state=directory
   tags: 
     - build_ami
-- shell: /usr/sbin/make_dockercfg {{docker_user}} {{docker_pass}} {{docker_email}} {{docker_registry}}
+- shell: /usr/sbin/make_dockercfg {{docker_user|quote}} {{docker_pass|quote}} {{docker_email|quote}} {{docker_registry|quote}}
   register: dockercfg
 - copy: src=etc/init/ecs_agent.conf dest=/etc/init/ecs_agent.conf
   notify: 
