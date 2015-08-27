@@ -22,6 +22,6 @@ except IndexError:
 
 auth_str = b64encode("%s:%s" % (user, password))
 
-auth_dict = {'auths': {registry: {"auth": auth_str, "email": email}}}
+auth_dict = {registry: {"auth": auth_str, "email": email}}
 
 print json.dumps(auth_dict)
