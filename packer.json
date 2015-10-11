@@ -1,4 +1,9 @@
 {
+  "variables": {
+    "changes": "{{ env `CHANGES` }}",
+    "gitinfo": "{{ env `GITINFO` }}",
+    "branch": "{{ env `BRANCH` }}"
+  },
   "builders": [
     {
       "type": "amazon-ebs",
@@ -10,33 +15,12 @@
       "instance_type": "m3.medium",
       "ssh_username": "ubuntu",
       "ssh_timeout": "5m",
-      "ami_name": "Empire PaaS {{isotime | clean_ami_name}}",
-      "ami_groups": ["all"]
-    },
-    {
-      "type": "amazon-ebs",
-      "name": "empire-us-west-1",
-      "access_key": "",
-      "secret_key": "",
-      "region": "us-west-1",
-      "source_ami": "ami-bf3dccfb",
-      "instance_type": "m3.medium",
-      "ssh_username": "ubuntu",
-      "ssh_timeout": "5m",
-      "ami_name": "Empire PaaS {{isotime | clean_ami_name}}",
-      "ami_groups": ["all"]
-    },
-    {
-      "type": "amazon-ebs",
-      "name": "empire-us-west-2",
-      "access_key": "",
-      "secret_key": "",
-      "region": "us-west-2",
-      "source_ami": "ami-f15b5dc1",
-      "instance_type": "m3.medium",
-      "ssh_username": "ubuntu",
-      "ssh_timeout": "5m",
-      "ami_name": "Empire PaaS {{isotime | clean_ami_name}}",
+      "ami_name": "Empire PaaS {{user `branch` | clean_ami_name}} {{isotime | clean_ami_name}}",
+      "ami_regions": ["us-west-1", "us-west-2"],
+      "tags": {
+        "changes": "{{user `changes`}}",
+        "gitinfo": "{{user `gitinfo`}}"
+      },
       "ami_groups": ["all"]
     }
   ],

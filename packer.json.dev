@@ -1,4 +1,9 @@
 {
+  "variables": {
+    "changes": "{{ env `CHANGES` }}",
+    "gitinfo": "{{ env `GITINFO` }}",
+    "branch": "{{ env `BRANCH` }}"
+  },
   "builders": [
     {
       "type": "amazon-ebs",
@@ -10,7 +15,11 @@
       "instance_type": "m3.medium",
       "ssh_username": "ubuntu",
       "ssh_timeout": "5m",
-      "ami_name": "DEV IMAGE Empire PaaS {{isotime | clean_ami_name}}",
+      "ami_name": "DEV IMAGE Empire PaaS {{user `branch` | clean_ami_name}} {{isotime | clean_ami_name}}",
+      "tags": {
+        "changes": "{{user `changes`}}",
+        "gitinfo": "{{user `gitinfo`}}"
+      },
       "ami_users": [
         "427009882155",
         "415355184500",
