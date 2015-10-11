@@ -10,4 +10,5 @@ dependencies:
 
 test:
   override:
-    - cd ~/empire_ami; make build
+    - cd ~/empire_ami; MACHINE=true make build:
+        timeout: 1200
