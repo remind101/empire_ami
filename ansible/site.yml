@@ -1,12 +1,17 @@
 - hosts: minion
   connection: local
+  vars:
+    enable_streaming_logs: "{{ lookup('env', 'ENABLE_STREAMING_LOGS') }}"
   roles:
     - common
     - swap
     - docker
     - aws_ecs
+    - { role: logspout, when: enable_streaming_logs == 'true' }
 - hosts: controller
   connection: local
+  vars:
+    enable_streaming_logs: "{{ lookup('env', 'ENABLE_STREAMING_LOGS') }}"
   roles:
     - common
     - swap
