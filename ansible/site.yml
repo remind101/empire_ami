@@ -15,6 +15,7 @@
 - hosts: empire_ami
   connection: local
   roles:
+    - {role: build_ami, tags: ['build_ami']}
     - common
     - docker
     - aws_ecs

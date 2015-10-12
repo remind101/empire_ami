@@ -1,0 +1,2 @@
+- copy: src=etc/default/grub dest=/etc/default/grub
+- shell: /usr/sbin/update-grub
