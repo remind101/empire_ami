@@ -8,6 +8,11 @@ except IndexError:
     print "syntax: %s <packer_output_file>" % sys.argv[0]
     sys.exit(1)
 
+
+def parse_ami(ami_field):
+    return [r.split(':') for r in ami_field.split('%!(PACKER_COMMA)')]
+
+
 for line in open(packer_file):
     line = line.strip()
     parts = line.split(',')
@@ -15,5 +20,5 @@ for line in open(packer_file):
         continue
     if parts[4] != 'id':
         continue
-    region, ami = parts[-1].split(':')
-    print "%s: %s" % (region, ami)
+    for r in parse_ami(parts[-1]):
+        print "%s: %s" % (r[0], r[1])
