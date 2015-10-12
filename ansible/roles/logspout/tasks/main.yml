@@ -1,0 +1,9 @@
+- copy: src=etc/init/logspout.conf dest=/etc/init/logspout.conf
+
+- file: path=/etc/empire/logspout/routes owner=root group=root mode=0755 state=directory
+
+- copy: src=etc/empire/logspout/routes/kinesis.json dest=/etc/empire/logspout/routes/kinesis.json
+
+- template: src=etc/empire/env/logspout.env dest=/etc/empire/env/logspout.env mode=0640 owner=root group=root
+
+- service: name=logspout state=started
