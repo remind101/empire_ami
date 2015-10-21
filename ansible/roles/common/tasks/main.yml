@@ -28,9 +28,6 @@
   tags: 
     - build_ami
 
-- apt: name=awscli
-  tags: 
-    - build_ami
 - apt: name=python-pip state=absent
   tags: 
     - build_ami
@@ -42,4 +39,7 @@
     - build_ami
 - pip: name=boto
   tags: 
+    - build_ami
+- pip: name=awscli
+  tags:
     - build_ami
