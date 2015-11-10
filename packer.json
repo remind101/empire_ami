@@ -16,7 +16,7 @@
       "ssh_username": "ubuntu",
       "ssh_timeout": "5m",
       "ami_name": "Empire PaaS {{user `branch` | clean_ami_name}} {{isotime | clean_ami_name}}",
-      "ami_regions": ["us-west-1", "us-west-2"],
+      "ami_regions": ["us-west-1", "us-west-2", "eu-west-1"],
       "tags": {
         "changes": "{{user `changes`}}",
         "gitinfo": "{{user `gitinfo`}}"
