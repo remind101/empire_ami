@@ -4,7 +4,7 @@
     - build_ami
 - shell: /usr/sbin/make_dockercfg {{docker_user|quote}} {{docker_pass|quote}} {{docker_email|quote}} {{docker_registry|quote}}
   register: dockercfg
-- copy: 'content="{{dockercfg.stdout}}" dest=/root/.dockercfg owner=root group=root mode=0600'
+- copy: content="{{dockercfg.stdout}}" dest=/root/.dockercfg owner=root group=root mode=0600
 - copy: src=etc/init/ecs_agent.conf dest=/etc/init/ecs_agent.conf
   notify: 
     - restart_ecs_agent
