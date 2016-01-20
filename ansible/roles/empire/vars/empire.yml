@@ -17,3 +17,7 @@ docker_pass: "{{ lookup('env', 'DOCKER_PASS') }}"
 docker_email: "{{ lookup('env', 'DOCKER_EMAIL') }}"
 docker_registry: "{{ lookup('env', 'DOCKER_REGISTRY') }}"
 database_url: "postgres://{{database_user}}:{{database_password}}@{{database_host}}/empire"
+
+github_webhooks_secret: "{{ lookup('env', 'EMPIRE_GITHUB_WEBHOOKS_SECRET') }}"
+github_deployments_environment: "{{ lookup('env', 'EMPIRE_GITHUB_DEPLOYMENTS_ENVIRONMENT') }}"
+events_sns_topic: "{{ lookup('env', 'EMPIRE_EVENTS_SNS_TOPIC') }}"
