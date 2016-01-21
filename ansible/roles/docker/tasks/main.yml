@@ -9,15 +9,19 @@
 
 - service: name=docker state=stopped
   when: new_docker_fs|changed
-- mount: name=/var/lib/docker/aufs state=umounted
+# Make absolutely sure aufs doesn't exist or docker freaks
+# https://github.com/docker/docker/issues/14026
+- shell: /bin/umount -t aufs -a -f
+  ignore_errors: yes
+  when: new_docker_fs|changed
+- shell: /bin/umount -f /var/lib/docker/aufs
+  ignore_errors: yes
+  when: new_docker_fs|changed
+# Ensure we don't have any left behind images on the old FS
+- shell: /bin/rm -rf /var/lib/docker/*
   ignore_errors: yes
   when: new_docker_fs|changed
 - mount: name=/var/lib/docker src=/dev/xvdh fstype=ext4 state=mounted
-  when: new_docker_fs|changed
-# Make absolutely sure aufs doesn't exist or docker freaks
-# https://github.com/docker/docker/issues/14026
-- mount: name=/var/lib/docker/aufs state=umounted
-  ignore_errors: yes
   when: new_docker_fs|changed
 - file: path=/var/lib/docker/aufs state=absent
   ignore_errors: yes
