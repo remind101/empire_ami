@@ -19,7 +19,7 @@ else
     log "No unused containers found, not cleaning."
 fi
 
-IMAGES=$(docker images -f "dangling=true" -q)
+IMAGES=$(docker images -q)
 if [ ! -z "$IMAGES" ]
 then
     log "Cleaning unused docker images:"
