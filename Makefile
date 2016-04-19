@@ -34,7 +34,7 @@ ami-all:
 
 download-packer:
 	mkdir -p $(HOME)/bin
-	if [ ! -f $(HOME)/bin/packer ]; then curl --location -O https://dl.bintray.com/mitchellh/packer/packer_0.8.2_linux_amd64.zip && unzip -d $(HOME)/bin packer_0.8.2_linux_amd64.zip; fi
+	if [ ! -f $(HOME)/bin/packer ]; then curl --location -O https://releases.hashicorp.com/packer/0.10.0/packer_0.10.0_linux_amd64.zip && unzip -d $(HOME)/bin packer_0.10.0_linux_amd64.zip; fi
 
 build:
 	set -o pipefail; CHANGES="$(CHANGES)" BRANCH="$(BRANCH)" GITINFO="$(BRANCH)@$(shell git log -1 --pretty=%H)" $(PACKERCMD)
