@@ -42,7 +42,7 @@
 - apt: name=apparmor
   tags: 
     - build_ami
-- apt: name=docker-engine=1.7.0-0~trusty
+- apt: name=docker-engine=1.11.2-0~trusty
   tags: 
     - build_ami
 
