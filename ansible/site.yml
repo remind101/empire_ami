@@ -16,7 +16,7 @@
     - common
     - swap
     - docker
-    - empire
+    - aws_ecs
 - hosts: empire_ami
   connection: local
   roles:
@@ -24,4 +24,3 @@
     - common
     - docker
     - aws_ecs
-    - empire
