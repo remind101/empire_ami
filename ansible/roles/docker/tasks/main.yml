@@ -27,41 +27,35 @@
   ignore_errors: yes
   when: new_docker_fs|changed
 
-- copy: src=etc/default/docker dest=/etc/default/docker owner=root group=root mode=0644
-  tags:
-    - build_ami
-  notify:
-    - restart_docker
-
 - apt: name=linux-image-extra-{{ansible_kernel}}
-  tags: 
+  tags:
     - build_ami
 - apt: name=linux-image-extra-virtual
-  tags: 
-    - build_ami
-- apt: name=apparmor
-  tags: 
-    - build_ami
-- apt: name=docker-engine=1.11.2-0~trusty
-  tags: 
-    - build_ami
-
-- copy: src=etc/init/docker.conf dest=/etc/init/docker.conf owner=root group=root mode=0644
   tags:
     - build_ami
-  notify:
-    - restart_docker
+- apt: name=apparmor
+  tags:
+    - build_ami
+- apt: name=docker-engine=1.11.2-0~trusty
+  tags:
+    - build_ami
 
 # Create docker_maid cron job
 - copy: src=usr/sbin/docker_maid dest=/usr/sbin/docker_maid owner=root group=root mode=0755
-  tags: 
+  tags:
     - build_ami
 - cron: name=docker_maid cron_file=docker_maid user=root minute="15" hour="2,10,18" job="/usr/sbin/docker_maid"
-  tags: 
+  tags:
     - build_ami
 - name: Adding ubuntu to docker group
   user: name=ubuntu groups=docker append=yes
-  tags: 
+  tags:
     - build_ami
+
+# Add docker defaults file to have docker use the docker host for dns
+- template: src=etc/default/docker.default dest=/etc/default/docker mode=0644 owner=root group=root
+  tags:
+    - build_ami
+  notify: restart_docker
 
 - service: name=docker state=started

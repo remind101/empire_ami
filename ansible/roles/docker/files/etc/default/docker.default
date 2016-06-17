@@ -4,8 +4,11 @@
 #DOCKER="/usr/local/bin/docker"
 
 # Use DOCKER_OPTS to modify the daemon startup options.
-#DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
-DOCKER_OPTS="--storage-driver=devicemapper"
+# We are adding the docker host IP as the dns server. This will be serviced by
+# dnsmasq running on the host. We want to do this to provide access to hosts
+# we write to /etc/hosts, in particular the dockerhost entry, where statsd will
+# be accessible from.
+DOCKER_OPTS="--dns {{ansible_default_ipv4.address}}"
 
 # If you need Docker to use an HTTP proxy, it can also be specified here.
 #export http_proxy="http://127.0.0.1:3128/"
