@@ -8,7 +8,7 @@
 # dnsmasq running on the host. We want to do this to provide access to hosts
 # we write to /etc/hosts, in particular the dockerhost entry, where statsd will
 # be accessible from.
-DOCKER_OPTS="--dns {{ansible_default_ipv4.address}}"
+# DOCKER_OPTS="--dns {{ansible_default_ipv4.address}}"
 
 # If you need Docker to use an HTTP proxy, it can also be specified here.
 #export http_proxy="http://127.0.0.1:3128/"
