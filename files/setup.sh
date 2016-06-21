@@ -1,5 +1,5 @@
 #!/bin/sh
-# Initial setup script - gets us ansible 1.7 in trusty
+# Initial setup script
 
 echo "deb http://us-east-1.ec2.archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse" > /etc/apt/sources.list.d/trusty-backports.list
 
@@ -13,8 +13,12 @@ Pin: release a=trusty-backports
 Pin-Priority: 750
 EOF
 
+# Install ansible 2.1
 apt-get update
-apt-get install -y ansible python-setuptools patch
+apt-get install -y software-properties-common python-setuptools
+apt-add-repository -y ppa:ansible/ansible
+apt-get update
+apt-get install -y ansible
 
 easy_install -U pip
 
@@ -31,5 +35,3 @@ chmod +x /usr/sbin/make_dockercfg
 
 mkdir -p /etc/empire
 mv /tmp/ansible /etc/empire/ansible
-
-/usr/bin/patch /usr/lib/python2.7/dist-packages/ansible/runner/lookup_plugins/first_found.py < /tmp/packer_files/ansible_lookup_plugin_first_found_template.patch

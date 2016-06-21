@@ -1,14 +1,14 @@
 - include_vars: aws_ecs.yml
 - file: name=/var/run/ecs_agent mode=0750 owner=root group=root state=directory
-  tags: 
+  tags:
     - build_ami
 - shell: /usr/sbin/make_dockercfg {{docker_user|quote}} {{docker_pass|quote}} {{docker_email|quote}} {{docker_registry|quote}}
   register: dockercfg
 - copy: content="{{dockercfg.stdout}}" dest=/root/.dockercfg owner=root group=root mode=0600
 - copy: src=etc/init/ecs_agent.conf dest=/etc/init/ecs_agent.conf
-  notify: 
+  notify:
     - restart_ecs_agent
 - template: src=etc/empire/env/ecs_agent.env dest=/etc/empire/env/ecs_agent.env mode=0640 owner=root group=root
-  notify: 
+  notify:
     - restart_ecs_agent
 - service: name=ecs_agent state=started
