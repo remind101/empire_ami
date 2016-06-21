@@ -10,12 +10,6 @@
 - Update to ansible to version 2.1
 - Update ecs-agent to version 1.10.0
 - Update docker to version 1.11.2
-- Remove custom docker upstart job. We enabled this to handle cases where
-  /var/run/docker.sock would get mounted as a directory (similar to this
-  thread: https://bugzilla.redhat.com/show_bug.cgi?id=1289851) due to a race
-  condition when restarting the docker daemon and the ecs-agent upstart task
-  respawning. Now we use `--restart=always` when running the ecs-agent to let
-  docker manage restarting the ecs-agent process for us.
 
 ## 2015-08-04
 
