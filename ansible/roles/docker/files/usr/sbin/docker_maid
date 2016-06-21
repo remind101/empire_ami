@@ -19,8 +19,8 @@ else
     log "No unused containers found, not cleaning."
 fi
 
-# We try to remove all images because there's no reliable way of telling 
-# used and unused images apart. Removing used images will fail anyway so 
+# We try to remove all images because there's no reliable way of telling
+# used and unused images apart. Removing used images will fail anyway so
 # it should be fine.
 IMAGES=$(docker images -q)
 if [ ! -z "$IMAGES" ]

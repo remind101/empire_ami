@@ -3,42 +3,42 @@
 - name: Manage /etc/hosts
   template: src=etc/hosts dest=/etc/hosts owner=root group=root mode=0644
 - apt: update_cache=yes
-  tags: 
+  tags:
     - build_ami
 - apt: name=apt-transport-https
-  tags: 
+  tags:
     - build_ami
 - apt: name=ca-certificates
-  tags: 
+  tags:
     - build_ami
 - apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main' state=present
-  tags: 
+  tags:
     - build_ami
 - apt_key: keyserver=p80.pool.sks-keyservers.net id=58118E89F3A912897C070ADBF76221572C52609D
-  tags: 
+  tags:
     - build_ami
 - apt: update_cache=yes
-  tags: 
+  tags:
     - build_ami
 - apt: name=openntpd
-  tags: 
+  tags:
     - build_ami
 - service: name=openntpd state=started enabled=yes
 - file: path=/etc/empire/env owner=root group=root mode=0644 state=directory
-  tags: 
+  tags:
     - build_ami
 
 - apt: name=python-pip state=absent
-  tags: 
+  tags:
     - build_ami
 - apt: name=python-setuptools
-  tags: 
+  tags:
     - build_ami
 - shell: /usr/bin/easy_install -U pip creates=/usr/local/bin/pip
-  tags: 
+  tags:
     - build_ami
 - pip: name=boto
-  tags: 
+  tags:
     - build_ami
 - pip: name=awscli
   tags:
