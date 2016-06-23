@@ -1,5 +1,5 @@
 - include_vars: aws_ecs.yml
-- file: name=/var/run/ecs_agent mode=0750 owner=root group=root state=directory
+- file: name=/var/lib/ecs_agent mode=0750 owner=root group=root state=directory
   tags:
     - build_ami
 - shell: /usr/sbin/make_dockercfg {{docker_user|quote}} {{docker_pass|quote}} {{docker_email|quote}} {{docker_registry|quote}}
