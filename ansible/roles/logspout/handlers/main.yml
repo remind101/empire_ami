@@ -1,2 +1,0 @@
-- name: restart_logspout
-  service: name=logspout state=restarted

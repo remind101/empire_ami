@@ -6,9 +6,4 @@
   register: dockercfg
 - copy: content="{{dockercfg.stdout}}" dest=/root/.dockercfg owner=root group=root mode=0600
 - copy: src=etc/init/ecs_agent.conf dest=/etc/init/ecs_agent.conf
-  notify:
-    - restart_ecs_agent
 - template: src=etc/empire/env/ecs_agent.env dest=/etc/empire/env/ecs_agent.env mode=0640 owner=root group=root
-  notify:
-    - restart_ecs_agent
-- service: name=ecs_agent state=started
