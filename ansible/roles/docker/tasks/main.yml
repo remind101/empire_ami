@@ -52,10 +52,4 @@
   tags:
     - build_ami
 
-# Add docker defaults file to have docker use the docker host for dns
-- template: src=etc/default/docker.default dest=/etc/default/docker mode=0644 owner=root group=root
-  tags:
-    - build_ami
-  notify: restart_docker
-
 - service: name=docker state=started
