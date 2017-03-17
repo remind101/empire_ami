@@ -46,7 +46,8 @@
       "command": "chmod +x /tmp/packer-provisioner-ansible-local/hosts; EMPIRE_HOSTGROUP=empire_ami sudo -E ansible-playbook --tags build_ami ",
       "playbook_file": "./ansible/site.yml",
       "inventory_file": "files/hosts",
-      "playbook_dir": "./ansible"
+      "playbook_dir": "./ansible",
+      "staging_directory": "/tmp/packer-provisioner-ansible-local"
     }
   ]
 }
